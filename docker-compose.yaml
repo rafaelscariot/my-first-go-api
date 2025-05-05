@@ -1,0 +1,23 @@
+services:
+  my-first-go-api-app:
+    container_name: my-first-go-api-app
+    image: go-api-tutorial
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - my-first-go-api_db
+  my-first-go-api_db:
+    container_name: my-first-go-api_db
+    image: postgres:17
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
